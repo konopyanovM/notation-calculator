@@ -1,0 +1,40 @@
+<div class="converter-wrapper">
+  <div class="converter">
+    <div class="converter-header">
+      <h1 class="converter-header__title">Masochist converter</h1>
+    </div>
+    <div class="converter-body">
+      <form class="converter-form" [formGroup]="formGroup">
+
+        <div class="row">
+          <label>
+            From
+            <select formControlName="from">
+              <option *ngFor="let notation of NOTATION_SYSTEMS" [value]="notation">{{notation | titlecase}}</option>
+            </select>
+          </label>
+          <label>
+            To
+            <select formControlName="to">
+              <option *ngFor="let notation of NOTATION_SYSTEMS" [value]="notation">{{notation | titlecase}}</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Input
+          <input type="text" formControlName="input" [pattern]="getPattern(getFromValue)"
+            oninput="this.value = this.value.toUpperCase()">
+        </label>
+      </form>
+      <ul class="converter-button-list">
+        <li class="converter-button-list__item" *ngFor="let number of currentNumbers">{{number}}</li>
+      </ul>
+      <label>
+        Output
+        <textarea class="converter__output" disabled>{{output}}</textarea>
+      </label>
+    </div>
+
+  </div>
+</div>
